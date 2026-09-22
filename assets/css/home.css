@@ -52,7 +52,7 @@ body {
 .link-all--big {
   display: inline-block;
   font-family: "Unbounded", "Manrope", sans-serif;
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(1.2rem, 2.5vw, 2.1rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .01em;
