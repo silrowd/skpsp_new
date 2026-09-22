@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260922b" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260922k" />
   <link rel="stylesheet" href="assets/css/home.css?v=20260921v" />
   <link rel="canonical" href="https://sk-psp.ru/" />
   <meta property="og:type" content="website" />
@@ -81,7 +81,7 @@
             <div class="nav-item">
             <a href="services" class="has-sub" aria-haspopup="true">
               Услуги
-              <span class="nav-caret" aria-hidden="true"></span>
+              
               </a>
             <div class="nav-dropdown">
                 <a href="service-general-contracting">Генеральный подряд</a>
@@ -94,7 +94,7 @@
             <div class="nav-item">
             <a href="objects" class="has-sub" aria-haspopup="true">
               Объекты
-              <span class="nav-caret" aria-hidden="true"></span>
+              
               </a>
             <div class="nav-dropdown">
                 <a href="business-centers">Бизнес-центры</a>
@@ -183,47 +183,12 @@
     <section class="section section--band" id="services" style="margin-top: 0; padding-top: 0;">
       <div class="container">
         <div class="section-head reveal">
-          <a class="link-all" href="services">Все услуги</a>
+          <a class="link-all link-all--big" href="services">Все услуги</a>
         </div>
 
-        <div class="objects-scroll">
-          <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Генеральный подряд" style="background-image:url('img_uslugi/GP.jpg')"></div>
-            <div class="card__body">
-              <h3 class="card__title"><a href="service-general-contracting">Генеральный подряд</a></h3>
-              <p class="card__text">Генеральный подрядчик комплекса «БИК-Монолит» выполняет полный цикл работ на объекте: от демонтажа старых конструкций до сдачи готового объекта.</p>
-              <a class="card__more" href="service-general-contracting">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Монолитные конструкции" style="background-image:url('img_uslugi/MK.jpg')"></div>
-            <div class="card__body">
-              <h3 class="card__title"><a href="service-monolith">Монолитные конструкции</a></h3>
-              <p class="card__text">Изготовление и монтаж монолитных железобетонных конструкций (фундаменты, стены, перекрытия, колонны).</p>
-              <a class="card__more" href="services">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Монтаж конструкций" style="background-image:url('img_uslugi/MGK.jpg')"></div>
-            <div class="card__body">
-              <h3 class="card__title"><a href="service-erection">Монтаж конструкций</a></h3>
-              <p class="card__text">Монтаж несущих и ограждающих конструкций зданий и сооружений, стеновых панелей, каркасных систем.</p>
-              <a class="card__more" href="services">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Реконструкция" style="background-image:url('img_uslugi/Rec.JPG')"></div>
-            <div class="card__body">
-              <h3 class="card__title"><a href="service-reconstruction">Реконструкция</a></h3>
-              <p class="card__text">ООО «БИК-Монолит» выполняет работы, реализуемые в ходе реконструкции и капитального ремонта зданий.</p>
-              <a class="card__more" href="services">Подробнее</a>
-            </div>
-          </article>
+        <div class="oscroll-row">
+          <div class="grid grid--4 services-grid-home" id="services-cards"></div>
         </div>
-      </div>
-    </section>
-
-    <!-- ===================== OBJECTS ===================== -->
     <div class="marquee" data-marquee aria-hidden="true">
       <div class="marquee__track">
         <span>Объекты</span>
@@ -297,7 +262,7 @@
     <section class="section section--blue" id="news" style="margin-top: 0; padding-top: 0;">
       <div class="container">
         <div class="section-head reveal">
-          <a class="link-all" href="news">Все новости</a>
+          <a class="link-all link-all--big" href="news">Все новости</a>
         </div>
 
         <div class="objects-scroll" data-home-news>
@@ -315,7 +280,7 @@
     <section class="section" id="clients" style="margin-top: 0; padding-top: 0;">
       <div class="container">
         <div class="section-head reveal">
-          <a class="link-all" href="clients">Все клиенты</a>
+          <a class="link-all link-all--big" href="clients">Все клиенты</a>
         </div>
 
         <div class="clients reveal" data-clients-carousel>
@@ -395,68 +360,9 @@
       </div>
     </section>
 
-    <!-- ===================== VACANCIES ===================== -->
-    <section class="section section--band" id="vacancies">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow">Присоединяйтесь</span>
-            <h2>Вакансии</h2>
-          </div>
-          <a class="link-all" href="vacancies">Все вакансии</a>
-        </div>
-
-        <div class="vac-row">
-          <article class="card reveal vac-card">
-            <div class="card__body">
-              <h3 class="card__title">Производитель работ</h3>
-              <p class="card__text">Опыт от 5 лет. Управление строительной площадкой, контроль качества и сроков.</p>
-              <a class="card__more" href="vacancy-production-manager">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal vac-card">
-            <div class="card__body">
-              <h3 class="card__title">Мастер участка</h3>
-              <p class="card__text">Опыт от 3 лет. Организация работы бригад, контроль расходования материалов.</p>
-              <a class="card__more" href="vacancy-site-master">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal vac-card">
-            <div class="card__body">
-              <h3 class="card__title">Инженер ПТО</h3>
-              <p class="card__text">Опыт от 2 лет. Ведение исполнительной документации, графиков работ и отчётность.</p>
-              <a class="card__more" href="vacancy-pot-engineer">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal vac-card">
-            <div class="card__body">
-              <h3 class="card__title">Электрик</h3>
-              <p class="card__text">Опыт от 3 лет. Монтаж и обслуживание сетей временного электроснабжения объекта.</p>
-              <a class="card__more" href="vacancy-electrician">Подробнее</a>
-            </div>
-          </article>
-          <article class="card reveal vac-card">
-            <div class="card__body">
-              <h3 class="card__title">Геодезист</h3>
-              <p class="card__text">Опыт от 3 лет. Геодезическое обеспечение строительства, работа по чертежам.</p>
-              <a class="card__more" href="vacancy-surveyor">Подробнее</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CONTACTS / FORM ===================== -->
+    <!-- ===================== CTA / FORM ===================== -->
     <section class="section section--band" id="contacts">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow">Свяжитесь с нами</span>
-            <h2>Контакты</h2>
-          </div>
-          <a class="link-all" href="contacts">Все контакты</a>
-        </div>
-
         <div class="contacts-grid">
           <div class="contact-list reveal">
             <div class="contact-item">
@@ -534,7 +440,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a class="brand" href="index">
-            <img class="brand__logo" src="img/logo.png" width="92" height="120" alt="СК ПСП" />
+            <img class="brand__logo" src="img/logo_white.png" width="61" height="80" alt="СК ПСП" />
           </a>
           <p>Строительство и реконструкция объектов различного назначения. Генеральный подряд полного цикла.</p>
         </div>
@@ -581,6 +487,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260921g" defer></script>
+  <script src="assets/js/main.js?v=20260922c" defer></script>
 </body>
 </html>

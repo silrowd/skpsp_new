@@ -1099,7 +1099,8 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   .nav > a:hover, .nav-item > a.has-sub:hover { color: #fff; background-color: rgba(255,255,255,.06); }
 
   /* Caret — right side, rotates on expand */
-  .nav-caret { display: none; }
+  .nav-caret { display: none; }
+
 
   /* Dropdown — hidden on mobile (Услуги/Объекты are plain links like the rest) */
   .nav-item { display: block; text-align: right; }
@@ -1207,7 +1208,13 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   flex-shrink: 0;
 }
 
-/* ---------- Objects horizontal scroll (index) ---------- */
+/* ---------- Objects horizontal scroll (index) — лента + стрелки снизу ---------- */
+.oscroll-row { display: block; }
+.services-grid-home .card__media { height: 180px; }
+@media (max-width: 860px) {
+  #services-cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; padding-bottom: 4px; }
+  #services-cards .card { flex: 0 0 calc(75% - 12px); scroll-snap-align: start; }
+}
 .objects-scroll {
   display: flex;
   align-items: flex-start;
@@ -1217,6 +1224,8 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   padding-bottom: 12px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-width: 0;
 }
 .objects-scroll .card,
 .objects-scroll .news-item {
@@ -1528,4 +1537,29 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   .site-header.is-scrolled {
     transition: none;
   }
+}
+/* ---------- Objects-scroll arrows (mouse) ---------- */
+.oscroll-arrow {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 159, 67, .6);
+  background: rgba(20, 21, 26, .85);
+  color: #fff;
+  cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 24px; line-height: 1;
+  transition: background .2s, border-color .2s, transform .15s var(--ease), color .2s;
+}
+.oscroll-arrow:hover {
+  background: #ff9f43; border-color: #ff9f43; color: #fff;
+  transform: scale(1.06);
+}
+.oscroll-arrow--prev { margin-right: 10px; }
+.oscroll-arrow--next { margin-left: 10px; }
+/* стрелки под лентой, по центру */
+.oscroll-row .oscroll-arrow { float: none; display: inline-grid; vertical-align: middle; }
+
+@media (max-width: 860px) {
+  .oscroll-arrow { width: 38px; height: 38px; font-size: 19px; }
 }

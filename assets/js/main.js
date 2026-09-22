@@ -20,17 +20,13 @@
     });
     // Close menu when a link is chosen (but NOT on dropdown parent toggle)
     nav.addEventListener('click', function (e) {
-      // Touch: tapping the parent link toggles its dropdown inline instead of navigating
+      // Touch: tapping the parent link navigates to its landing page and closes menu.
       var hasSub = e.target.closest('a.has-sub');
       if (hasSub && !hasSub.closest('.nav-dropdown') && isTouch()) {
-        var wasExpanded = hasSub.getAttribute('aria-expanded') === 'true';
-        hasSub.setAttribute('aria-expanded', wasExpanded ? 'false' : 'true');
-        // Close other expanded sub-menus
-        nav.querySelectorAll('a.has-sub[aria-expanded="true"]').forEach(function (a) {
-          if (a !== hasSub) a.setAttribute('aria-expanded', 'false');
-        });
-        e.preventDefault();
-        return; // don't close the main menu
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        nav.querySelectorAll('a.has-sub').forEach(function (a) { a.setAttribute('aria-expanded', 'false'); });
+        return;
       }
       // Mouse: clicking the parent navigates to its landing page (dropdown opens on hover) —
       // just close the mobile panel state if open.
@@ -122,6 +118,12 @@
         }));
       } catch (e) {}
     }
+    // Состояние хероя актуально только для главной: при уходе с index очищаем,
+    // иначе возврат на другую страницу (например «Объекты») восстановит
+    // сохранённый скролл и унесёт её вниз.
+    window.addEventListener('pagehide', function () {
+      if (location.pathname !== '/') sessionStorage.removeItem(HERO_STATE_KEY);
+    });
     window.addEventListener('pagehide', saveHeroState);
     if (typeof beforeunload !== 'undefined') window.addEventListener('beforeunload', saveHeroState);
 
@@ -178,7 +180,99 @@
     auto();
   }
 
-  /* ---------- Scroll reveal ---------- */
+  /* ---------- Services grid (home): все 4 услуги в ряд ---------- */
+  var servicesGrid = document.querySelector('#services-cards');
+  if (servicesGrid) {
+    var SERVICES = [
+      { img: 'img_uslugi/GP.jpg', alt: 'Генеральный подряд', title: 'Генеральный подряд',
+        text: 'Генеральный подрядчик комплекса «БИК-Монолит» выполняет полный цикл работ на объекте: от демонтажа старых конструкций до сдачи готового объекта.',
+        link: 'service-general-contracting' },
+      { img: 'img_uslugi/MK.jpg', alt: 'Монолитные конструкции', title: 'Монолитные конструкции',
+        text: 'Изготовление и монтаж монолитных железобетонных конструкций (фундаменты, стены, перекрытия, колонны).',
+        link: 'service-monolith' },
+      { img: 'img_uslugi/MGK.jpg', alt: 'Монтаж конструкций', title: 'Монтаж конструкций',
+        text: 'Монтаж несущих и ограждающих конструкций зданий и сооружений, стеновых панелей, каркасных систем.',
+        link: 'service-erection' },
+      { img: 'img_uslugi/Rec.JPG', alt: 'Реконструкция', title: 'Реконструкция',
+        text: 'ООО «БИК-Монолит» выполняет работы, реализуемые в ходе реконструкции и капитального ремонта зданий.',
+        link: 'service-reconstruction' }
+    ];
+    servicesGrid.innerHTML = SERVICES.map(function (s) {
+      return '<article class="card reveal">' +
+        '<div class="card__media" role="img" aria-label="' + esc(s.alt) + '" style="background-image:url(\'' + s.img + '\')"></div>' +
+        '<div class="card__body">' +
+          '<h3 class="card__title"><a href="' + s.link + '">' + esc(s.title) + '</a></h3>' +
+          '<p class="card__text">' + esc(s.text) + '</p>' +
+          '<a class="card__more" href="' + s.link + '">Подробнее</a>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+  }
+
+  /* ---------- Horizontal carousels (objects-scroll) — стрелки для мыши ---------- */
+  function initObjectsScrollArrows() {
+    document.querySelectorAll('.objects-scroll').forEach(function (row) {
+      if (!row || row.parentNode.classList.contains('oscroll-row')) return;
+      var wrap = document.createElement('div');
+      wrap.className = 'oscroll-row';
+      row.parentNode.insertBefore(wrap, row);
+
+      var prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'oscroll-arrow oscroll-arrow--prev';
+      prev.setAttribute('aria-label', 'Назад');
+      prev.innerHTML = '&#8249;';
+
+      var next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'oscroll-arrow oscroll-arrow--next';
+      next.setAttribute('aria-label', 'Вперёд');
+      next.innerHTML = '&#8250;';
+
+      wrap.appendChild(row);
+      wrap.appendChild(prev);
+      wrap.appendChild(next);
+
+      var canScroll = function () { return row.scrollWidth > row.clientWidth + 4; };
+      var stepSize = function () {
+        var card = row.querySelector('.card, .news-item');
+        if (!card) return row.clientWidth * 0.8;
+        var gap = parseFloat(getComputedStyle(row).gap) || 22;
+        return card.getBoundingClientRect().width + gap;
+      };
+
+      prev.addEventListener('click', function () {
+        if (!canScroll()) return;
+        row.scrollBy({ left: -stepSize(), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      });
+      next.addEventListener('click', function () {
+        if (!canScroll()) return;
+        var max = row.scrollWidth - row.clientWidth;
+        row.scrollBy({ left: Math.min(stepSize(), max), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      });
+
+      // Скрываем стрелки, если карусель не прокручивается (например, новости ещё грузятся)
+      var check = function () {
+        var show = canScroll();
+        prev.style.display = show ? '' : 'none';
+        next.style.display = show ? '' : 'none';
+      };
+      row.addEventListener('scroll', function () { requestAnimationFrame(check); });
+      window.addEventListener('resize', check);
+      if (row.querySelector('.news-empty') || !row.children.length) {
+        // Новости подгружаются асинхронно — проверяем несколько раз
+        var tries = 0;
+        var iv = setInterval(function () {
+          check();
+          if (++tries > 20 || canScroll()) clearInterval(iv);
+        }, 500);
+      } else {
+        check();
+      }
+    });
+  }
+  initObjectsScrollArrows();
+
   function initReveal() {
     var els = document.querySelectorAll('.reveal:not(.is-visible)');
     if (!els.length) return;
