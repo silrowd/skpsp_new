@@ -510,11 +510,13 @@
       ? "background-image:url('" + esc(n.image) + "');"
       : "background-image:" + FALLBACK_IMG + ";";
     var cls = 'news-item reveal' + (feature ? ' news-item--feature' : '');
+    // Home page: photo → date → address(title, 2 lines) → text(2 lines) → read link. No separate title block.
+    var isHomeCard = !!(typeof document !== 'undefined' && document.querySelector('[data-home-news]'));
     var linkTxt = n.link_text || 'Читать полностью';
     // Полная новость открывается в новом окне (всегда есть куда вести)
     var fullUrl = newsFullUrl(n);
     var newWin = ' target="_blank" rel="noopener"';
-    var titleHtml = '<a href="' + esc(fullUrl) + '"' + newWin + '>' + esc(n.title) + '</a>';
+    var titleHtml = '<span class="news-item__title">' + esc(n.title) + '</span>';
     var excerpt = newsExcerpt(n.text);
     var readHtml = '<a class="news-item__read" href="' + esc(fullUrl) + '"' + newWin + '>' + esc(linkTxt) + '</a>';
     var html =
