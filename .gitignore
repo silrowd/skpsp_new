@@ -1,0 +1,6 @@
+.git/
+*.bak_*
+*.bak.zaglushka
+__pycache__/
+.DS_Store
+Thumbs.db

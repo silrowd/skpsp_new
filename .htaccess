@@ -1,0 +1,38 @@
+# Чистые URL: /about → about.html, /admin → admin/admin.php
+Options -MultiViews
+RewriteEngine On
+
+# 1. Старый адрес /admin/admin.php → /admin/ (301)
+# Защита от петли: срабатывает ТОЛЬКО при прямом запросе клиента, игнорируя внутренние рерайты Apache
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^admin/admin\.php$ /admin/ [R=301,L]
+
+# 2. Панель администратора: /admin и /admin/ → admin/admin.php
+RewriteRule ^admin/?$ admin/admin.php [L]
+
+# 3. Фавиконка: /favicon.ico → img/favicon.ico
+RewriteRule ^favicon\.ico$ /img/favicon.ico [L]
+
+# 4. Остальные страницы без расширения: /about → about.html (если файл существует)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-z0-9\-]+)$ $1.html [L]
+
+# 5. Тёмная 404 вместо стандартной светлой Apache
+ErrorDocument 404 /404.html
+
+# ---------- Security-заголовки ----------
+# Действует, если включён mod_headers (на типовом хостинге включён).
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    # HSTS: только для HTTPS (иначе браузеры кэшируют и ломают доступ по HTTP)
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == on"
+    # CSP: self — сайт работает на одних своих ассетах, внешних скриптов/фонт нет.
+    # frame-ancestors совпадает с X-Frame-Options SAMEORIGIN (страхуемся от дубликата,
+    # CSP приоритетнее). font-src data: — favicon может быть embedded.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+    # Убираем версию PHP из заголовков (дублируется expose_php в .user.ini)
+    Header always unset X-Powered-By
+</IfModule>
