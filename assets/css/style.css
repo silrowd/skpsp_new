@@ -555,6 +555,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .lead__text h2 { font-size: var(--fs-2xl); color: var(--ink); }
 .lead__text p { font-size: var(--fs-lg); color: var(--text); }
+.lead--solo { grid-template-columns: 1fr; }
 .lead__stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
