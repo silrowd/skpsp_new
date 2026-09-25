@@ -5,20 +5,31 @@
    Brand tokens extracted from the legacy CSS (css/common.css, central.css).
    ========================================================================= */
 
-/* ---------- Design tokens ---------- */
+/* ---------- Design tokens ----------
+   Palette lock (design-taste-frontend §4.2):
+   - red = единственный action/CTA-цвет (кнопки, cta-band, primary hover)
+   - blue = только семантическая роль: ссылки, focus, низкие opacity-тенты;
+     никогда не для крупных fills и CTA
+   - orange (--orange-accent) = задокументированное исключение:
+     active-nav + подсветка слов в hero-заголовках
+   - нейтралы = одна холодная (navy-tinted) «серая» семья;
+     тени тонированы под оттенок фона, не чистый чёрный */
 :root {
-  /* Brand red (primary) */
+  /* Brand red (primary) — единственный action/CTA-цвет */
   --red:        #a22036;
   --red-dark:   #791828;
   --red-accent: #d75067;
 
-  /* Brand blue (accent / links) */
+  /* Brand blue — семантическая роль: ссылки, hover, тенты */
   --blue:        #3082a8;
   --blue-dark:   #00659d;
   --blue-light:  #c5e8fc;
 
-  /* Neutrals (тёмно-синяя палитра) */
-  --bg:         #292929;
+  /* Orange accent — задокументированное исключение (active-nav, hero-подсветка) */
+  --orange-accent: #ff9f43;
+
+  /* Neutrals (тёмно-синяя палитра, единая холодная «серая» семья) */
+  --bg:         #222a33;
   --surface:    #12233a;
   --band:       #173049;
   --border:     #24466a;
@@ -29,9 +40,10 @@
   /* Layout */
   --maxw: 1180px;
   --radius: 10px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .35), 0 1px 2px rgba(0, 0, 0, .25);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, .45);
-  --shadow-lg: 0 18px 48px rgba(0, 0, 0, .6);
+  /* Тени тонированы под navy-оттенок фона (не чистый чёрный) */
+  --shadow-sm: 0 1px 3px rgba(8, 15, 26, .4), 0 1px 2px rgba(8, 15, 26, .3);
+  --shadow-md: 0 8px 24px rgba(8, 15, 26, .5);
+  --shadow-lg: 0 18px 48px rgba(8, 15, 26, .6);
   --container-pad: 20px;
 
   /* Type scale */
@@ -89,8 +101,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .section { padding: clamp(40px, 6vw, 72px) 0; }
-.section--band { background: #292929; }
-.section--blue { background: #292929; }
+.section--band { background: var(--bg); }
+.section--blue { background: var(--bg); }
 
 .section-head {
   display: flex;
@@ -999,7 +1011,7 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: #292929;
+  background: var(--bg);
   color: #bfd0e2;
   margin-top: 0;
 }
