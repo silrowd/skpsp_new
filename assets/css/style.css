@@ -1504,17 +1504,15 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
    Параллакс идёт через независимое свойство translate, чтобы не конфликтовать
    с transform в hero-kenburns. JS-fallback в main.js отключается при поддержке. */
 @supports (animation-timeline: view()) {
-  .hero__bg {
-    animation: hero-kenburns 1.4s var(--ease) both, hero-parallax linear both view();
-    will-change: translate;
-  }
+  /* Именованный таймлайн на самом .marquee: прогресс по видимости полосы в вьюпорте.
+     Анонимный view() на потомке не работает — ближайший overflow:hidden (.marquee)
+     становится scroll-box'ом и замораживает прогресс. Таймлайн задаётся отдельным
+     свойством animation-timeline (в shorthand его указывать нельзя). */
+  .marquee { view-timeline: --band block; }
   .marquee__track {
-    animation: marquee-scrub linear both view();
+    animation: marquee-scrub linear both;
+    animation-timeline: --band;
   }
-}
-@keyframes hero-parallax {
-  from { translate: 0 62px; }
-  to   { translate: 0 -46px; }
 }
 @keyframes marquee-scrub {
   from { transform: translateX(-60vw); opacity: 0; }

@@ -38,8 +38,24 @@ curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8765/<path>
 ## 6. Motion
 - `window.addEventListener('scroll')` не использовать (в современных браузерах). Схема:
   - дискретные состояния (тень шапки, scrollspy) → **IntersectionObserver** (+ сентинел для порогов);
-  - непрерывный scrub (hero-параллакс, marquee) → **CSS `animation-timeline: view()`** в `@supports`, параллакс через независимое свойство `translate` (чтобы не конфликтовать с transform Ken Burns).
-  - JS-fallback для старых браузеров оставляется, гейтится `CSS.supports('animation-timeline: view()')`.
+  - непрерывный scrub (marquee) → **CSS scroll-driven animations** в `@supports`, JS-fallback гейтится `CSS.supports('animation-timeline: view()')`.
+
+### Scroll-driven animations — три ловушки (проверено на marquee, инцидент 2026-09-25)
+1. **Анонимный `view()` на потомке не работает**, если между ним и вьюпортом есть предок с `overflow: hidden`/`auto` — этот предок становится scroll-box'ом таймлайна, а внутри него ничего не скроллится → прогресс заморожен, анимация молча стоит. Решение: **именованный таймлайн** на самом элементе-контейнере (его ближайший scroll-container — вьюпорт):
+   ```css
+   .marquee { view-timeline: --band block; }
+   .marquee__track { animation: marquee-scrub linear both; animation-timeline: --band; }
+   ```
+2. **Имя таймлайна нельзя писать в shorthand `animation`** (`animation: name linear both var(--band)` — невалидно, вся декларация молча отбрасывается). Только отдельным свойством `animation-timeline: --band;`. Длительность при scroll-таймлайне не указывается (keyframes мапятся на весь диапазон таймлайна).
+3. **Проверять существование целевых классов до написания CSS/JS**: `.hero__bg` в разметке нигде нет — hero-параллакс никогда не работал ни в JS, ни в CSS (оба целились в пустоту). Не добавлять «фичи» по памяти о классах.
+
+### Верификация scroll-анимаций без браузера под рукой
+Headless Chrome + CDP через встроенный WebSocket Node 22 (шаблон `$TEMP/cdp_test.mjs`):
+1. `chrome.exe --headless=new --remote-debugging-port=9335 ... about:blank`
+2. `GET /json/list` → webSocketDebuggerUrl вкладки;
+3. `Page.navigate` на локальный сервер, ждать `document.readyState === 'complete'`;
+4. Циклом `window.scrollTo(0, y)` + пауза 400 мс + `Runtime.evaluate` чтения `getComputedStyle(el).transform/.opacity` при нескольких y — значения должны меняться с прокруткой.
+Если `transform: none` на всех позициях → анимация не применена (невалидная декларация), а не «просто стоит».
 
 ## 7. Контент
 - Фейк-перфект в статистике запрещён («100%», «99.9%») — либо реальная метрика, либо текстовая формулировка (пример: «в срок / сдача объектов и контроль качества»).
