@@ -10,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
   <link rel="stylesheet" href="assets/css/fonts.css?v=20260925a" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260925d" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260925e" />
   <link rel="stylesheet" href="assets/css/home.css?v=20260925a" />
   <link rel="canonical" href="https://sk-psp.ru/" />
   <meta property="og:type" content="website" />
@@ -177,7 +177,7 @@
         <span>Услуги</span>
       </div>
     </div>
-    <section class="section section--band" id="services" style="margin-top: 0; padding-top: 0;">
+    <section class="section section--band section--flush-top" id="services">
       <div class="container">
         <div class="section-head reveal">
           <a class="link-all link-all--big" href="services">Все услуги</a>
@@ -191,7 +191,7 @@
         <span>Объекты</span>
       </div>
     </div>
-    <section class="section" id="objects" style="margin-top: 0; padding-top: 0;">
+    <section class="section section--flush-top" id="objects">
       <div class="container">
         <div class="section-head reveal">
           <a class="link-all link-all--big" href="objects">Все объекты</a>
@@ -199,7 +199,7 @@
 
         <div class="objects-scroll">
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Бизнес-центры" style="background-image:url('img_objects/BC.webp')"></div>
+            <div class="card__media bg-obj-bc" role="img" aria-label="Бизнес-центры"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="business-centers">Бизнес-центры</a></h3>
               <p class="card__text">Строительство и реконструкция офисных и деловых центров.</p>
@@ -207,7 +207,7 @@
             </div>
           </article>
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Торговые комплексы" style="background-image:url('img_objects/TC.webp')"></div>
+            <div class="card__media bg-obj-tc" role="img" aria-label="Торговые комплексы"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="shopping-malls">Торговые комплексы</a></h3>
               <p class="card__text">ТЦ и торговые объекты: от основания до ввода в эксплуатацию.</p>
@@ -215,7 +215,7 @@
             </div>
           </article>
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Жилые дома" style="background-image:url('img_objects/ZB.webp')"></div>
+            <div class="card__media bg-obj-zb" role="img" aria-label="Жилые дома"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="residential">Жилые дома</a></h3>
               <p class="card__text">Строительство многоквартирных и индивидуальных жилых домов.</p>
@@ -223,7 +223,7 @@
             </div>
           </article>
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Промышленные объекты" style="background-image:url('img_objects/LB.webp')"></div>
+            <div class="card__media bg-obj-lb" role="img" aria-label="Промышленные объекты"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="industrial">Промышленные объекты</a></h3>
               <p class="card__text">Производственные и логистические здания, склады, ангары.</p>
@@ -231,7 +231,7 @@
             </div>
           </article>
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Общественные здания" style="background-image:url('img_objects/PB1.jpg')"></div>
+            <div class="card__media bg-obj-pb1" role="img" aria-label="Общественные здания"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="public-buildings">Общественные здания</a></h3>
               <p class="card__text">Школы, детские сады, медучреждения и объекты социальной сферы.</p>
@@ -239,7 +239,7 @@
             </div>
           </article>
           <article class="card reveal">
-            <div class="card__media" role="img" aria-label="Реконструкция" style="background-image:url('img_objects/Rec.webp')"></div>
+            <div class="card__media bg-obj-rec" role="img" aria-label="Реконструкция"></div>
             <div class="card__body">
               <h3 class="card__title"><a href="reconstruction">Реконструкция</a></h3>
               <p class="card__text">Реконструкция и модернизация зданий различного назначения.</p>
@@ -256,7 +256,7 @@
         <span>Новости</span>
       </div>
     </div>
-    <section class="section section--blue" id="news" style="margin-top: 0; padding-top: 0;">
+    <section class="section section--blue section--flush-top" id="news">
       <div class="container">
         <div class="section-head reveal">
           <a class="link-all link-all--big" href="news">Все новости</a>
@@ -274,7 +274,7 @@
         <span>Клиенты</span>
       </div>
     </div>
-    <section class="section" id="clients" style="margin-top: 0; padding-top: 0;">
+    <section class="section section--flush-top" id="clients">
       <div class="container">
         <div class="section-head reveal">
           <a class="link-all link-all--big" href="clients">Все клиенты</a>
@@ -420,7 +420,7 @@
 
             <div class="privacy" data-field="privacy">
               <input id="f-privacy" name="privacy" type="checkbox" required />
-              <label for="f-privacy" style="font-weight:400;">Я соглашаюсь на обработку персональных данных в соответствии с <a href="privacy">политикой конфиденциальности</a>.</label>
+              <label for="f-privacy">Я соглашаюсь на обработку персональных данных в соответствии с <a href="privacy">политикой конфиденциальности</a>.</label>
             </div>
 
             <button class="btn btn--blue btn--block" type="submit">Отправить заявку<span class="btn__loading" hidden>Отправляем…</span></button>

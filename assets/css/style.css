@@ -1610,6 +1610,40 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 @media (max-width: 860px) {
   .oscroll-arrow { width: 38px; height: 38px; font-size: 19px; }
 }
+/* ---------- Фоны контента: фото по карточкам (ранее inline-стили) ---------- */
+.bg-obj-bc    { background-image: url("../../img_objects/BC.webp"); }
+.bg-obj-tc    { background-image: url("../../img_objects/TC.webp"); }
+.bg-obj-zb    { background-image: url("../../img_objects/ZB.webp"); }
+.bg-obj-lb    { background-image: url("../../img_objects/LB.webp"); }
+.bg-obj-pb1   { background-image: url("../../img_objects/PB1.jpg"); }
+.bg-obj-rec   { background-image: url("../../img_objects/Rec.webp"); }
+
+.bg-svc-gp    { background-image: url("../../img_uslugi/GP.jpg"); }
+.bg-svc-mk    { background-image: url("../../img_uslugi/MK.jpg"); }
+.bg-svc-mgk   { background-image: url("../../img_uslugi/MGK.jpg"); }
+.bg-svc-rec   { background-image: url("../../img_uslugi/Rec.JPG"); }
+
+.bg-rv-farmacon  { background-image: url("../../img_reviews/farmacon.jpg"); }
+.bg-rv-step1     { background-image: url("../../img_reviews/step-1.jpg"); }
+.bg-rv-psb       { background-image: url("../../img_reviews/psb-zhilstroy.jpg"); }
+.bg-rv-tis       { background-image: url("../../img_reviews/tsentr-invest-stroy.jpg"); }
+.bg-rv-step2     { background-image: url("../../img_reviews/step-2.jpg"); }
+.bg-rv-selins    { background-image: url("../../img_reviews/selins.jpg"); }
+.bg-rv-klass     { background-image: url("../../img_reviews/klass.jpg"); }
+.bg-rv-meridian  { background-image: url("../../img_reviews/meridian.jpg"); }
+.bg-rv-union     { background-image: url("../../img_reviews/union.jpg"); }
+.bg-rv-bic       { background-image: url("../../img_reviews/bic.jpg"); }
+
+.bg-vac-proizv   { background-image: url("../../img_vacan/proizv.jpg"); }
+.bg-vac-master   { background-image: url("../../img_vacan/master.jpg"); }
+.bg-vac-pto      { background-image: url("../../img_vacan/pto.jpg"); }
+.bg-vac-elec     { background-image: url("../../img_vacan/elec.jpg"); }
+.bg-vac-geo      { background-image: url("../../img_vacan/geo.jpg"); }
+
+/* ---------- Утилиты отступов ---------- */
+.section--flush-top { padding-top: 0; }
+.mt-28 { margin-top: 28px; }
+
 /* ---------- Страница 404 ---------- */
 .page-404 {
   min-height: calc(100vh - 88px);
