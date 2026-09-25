@@ -1174,6 +1174,10 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .crane-accent path { animation: none !important; stroke-dashoffset: 0 !important; }
+  .crane-accent .crane__load { animation: none !important; opacity: 1 !important; }
+  .crane__hoist { animation: none !important; }
+  .card__media::after { transition: none; transform: none; }
   /* без анимаций мобильного меню */
   .nav.is-open a { animation: none; }
   .nav { transition: opacity .3s var(--ease); transform: none; }
@@ -1563,6 +1567,50 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 .card:hover { border-color: #c0485c; }
 .card:hover .card__media { filter: brightness(1.07); }
 .card:hover .card__media::before { transform: scaleX(1); }
+
+/* ---------- Карточки: зум фото при hover (GPU, через ::after) ---------- */
+.card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform .6s var(--ease);
+}
+.card:hover .card__media::after { transform: scale(1.05); }
+
+/* ---------- Hero-акцент: анимированный кран (рисуется при загрузке) ---------- */
+.crane-accent { width: 88px; display: block; margin-bottom: 20px; }
+.crane-accent path {
+  fill: none;
+  stroke: var(--orange-accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  animation: crane-draw .7s ease forwards;
+}
+.crane__base    { --len: 20; animation-delay: .1s; }
+.crane__mast    { --len: 68; animation-delay: .35s; }
+.crane__jib     { --len: 72; animation-delay: 1s; }
+.crane__tie     { --len: 73; animation-delay: 1.4s; }
+.crane__trolley { --len: 4;  animation-delay: 1.7s; }
+.crane__cable   { --len: 28; animation-duration: .5s; animation-delay: 1.9s; }
+@keyframes crane-draw { to { stroke-dashoffset: 0; } }
+.crane-accent .crane__load {
+  fill: var(--orange-accent);
+  stroke: none;
+  opacity: 0;
+  animation: crane-load-in .4s ease 2.4s forwards;
+}
+@keyframes crane-load-in { to { opacity: 1; } }
+.crane__hoist { animation: crane-sway 3.2s ease-in-out 3.2s infinite alternate; }
+@keyframes crane-sway {
+  from { transform: translateY(0); }
+  to   { transform: translateY(7px); }
+}
 
 /* ---------- Счётчики: пульс при завершении ---------- */
 @keyframes stat-pop {

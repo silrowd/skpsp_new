@@ -10,7 +10,7 @@
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
   <link rel="stylesheet" href="assets/css/fonts.css?v=20260925a" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260925f" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260925g" />
   <link rel="stylesheet" href="assets/css/home.css?v=20260925a" />
   <link rel="canonical" href="https://sk-psp.ru/" />
   <meta property="og:type" content="website" />
@@ -119,6 +119,18 @@
       </div>
 
       <div class="container hero__content">
+        <!-- Анимированный кран: рисуется при загрузке, затем лёгкое покачивание груза (чистый CSS) -->
+        <svg class="crane-accent" viewBox="0 0 120 84" aria-hidden="true">
+          <path class="crane__base" d="M14 78 H34"/>
+          <path class="crane__mast" d="M24 78 V10"/>
+          <path class="crane__jib" d="M24 18 H96"/>
+          <path class="crane__tie" d="M24 10 L96 18"/>
+          <g class="crane__hoist">
+            <path class="crane__trolley" d="M78 18 V22"/>
+            <path class="crane__cable" d="M78 22 V50"/>
+            <path class="crane__load" d="M72 50 H84 V60 H72 Z"/>
+          </g>
+        </svg>
         <div class="hero__captions">
           <div class="hero__caption hero__caption--glass is-active">
             <span class="eyebrow eyebrow--orange">Строительная компания</span>
