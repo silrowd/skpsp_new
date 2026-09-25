@@ -1491,6 +1491,28 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   background: var(--hero-bg, var(--blue-dark)) center / cover no-repeat;
   animation: hero-kenburns 1.4s var(--ease) both;
 }
+/* ---------- Scroll-driven animations (без JS): hero-параллакс + marquee ----------
+   Параллакс идёт через независимое свойство translate, чтобы не конфликтовать
+   с transform в hero-kenburns. JS-fallback в main.js отключается при поддержке. */
+@supports (animation-timeline: view()) {
+  .hero__bg {
+    animation: hero-kenburns 1.4s var(--ease) both, hero-parallax linear both view();
+    will-change: translate;
+  }
+  .marquee__track {
+    animation: marquee-scrub linear both view();
+  }
+}
+@keyframes hero-parallax {
+  from { translate: 0 62px; }
+  to   { translate: 0 -46px; }
+}
+@keyframes marquee-scrub {
+  from { transform: translateX(-60vw); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  to   { transform: translateX(112vw); opacity: 0; }
+}
 .hero__content > * {
   animation: hero-fade-up .7s var(--ease) both;
 }
@@ -1588,4 +1610,11 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 
 @media (max-width: 860px) {
   .oscroll-arrow { width: 38px; height: 38px; font-size: 19px; }
+}
+/* Сентинел для IntersectionObserver (тень шапки при скролле, main.js) */
+.scroll-sentinel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1px; height: 9px;
+  pointer-events: none;
 }

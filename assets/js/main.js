@@ -9,6 +9,11 @@
   var prefersReducedMotion =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* CSS scroll-driven animations (Chrome/Edge 115+, Safari 26+): при поддержке
+     hero-параллакс и marquee работают без JS — без window scroll-listener'ов. */
+  var supportsScrollTimeline =
+    typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: view()');
+
   /* ---------- Mobile navigation ---------- */
   var navToggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
@@ -312,7 +317,7 @@
 
   /* ---------- Hero parallax ---------- */
   function initHeroParallax() {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || supportsScrollTimeline) return; // CSS: animation-timeline: view()
     var hero = document.querySelector('.hero');
     var bg = hero && hero.querySelector('.hero__bg');
     if (!bg) return;
@@ -334,10 +339,19 @@
   }
   initHeroParallax();
 
-  /* ---------- Header shadow on scroll ---------- */
+  /* ---------- Header shadow on scroll (IntersectionObserver-сентинел) ---------- */
   function initHeaderScroll() {
     var header = document.querySelector('.site-header');
     if (!header) return;
+    if ('IntersectionObserver' in window) {
+      var sent = document.createElement('div');
+      sent.className = 'scroll-sentinel';
+      document.body.insertBefore(sent, document.body.firstChild);
+      new IntersectionObserver(function (entries) {
+        header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(sent);
+      return;
+    }
     function onScroll() {
       header.classList.toggle('is-scrolled', window.scrollY > 8);
     }
@@ -391,13 +405,22 @@
       }
       setActive(target);
     }
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { ticking = false; onScroll(); });
-    }, { passive: true });
-    onScroll();
+    onScroll(); // начальное состояние — «Главная»
+    if ('IntersectionObserver' in window) {
+      /* Пересчёт только в момент пересечения секцией пороговой линии, а не каждый кадр */
+      var io = new IntersectionObserver(function () { onScroll(); }, {
+        rootMargin: '-' + offset + 'px 0px 0px 0px',
+        threshold: 0
+      });
+      sections.forEach(function (s) { io.observe(s.el); });
+    } else {
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { ticking = false; onScroll(); });
+      }, { passive: true });
+    }
   }
   initScrollSpy();
 
@@ -1027,7 +1050,7 @@
   /* ---------- Marquee: single word, scrolls across container on page scroll ---------- */
   (function () {
     var marquees = document.querySelectorAll('[data-marquee]');
-    if (!marquees.length) return;
+    if (!marquees.length || supportsScrollTimeline) return; // CSS: animation-timeline: view()
 
     var tracks = [];
     Array.prototype.forEach.call(marquees, function (m) {
