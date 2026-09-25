@@ -767,7 +767,7 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   height: 120px;
   display: grid;
   place-items: center;
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -801,13 +801,14 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 }
 .clients-grid .client {
   width: auto;
-  height: 148px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  min-height: 148px;
+  height: auto;
+  background: #fff;
+  border-color: rgba(0,0,0,.08);
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  color: var(--ink);
 }
+.clients-grid .client:hover { border-color: var(--red); transform: translateY(-3px); }
 .client__logo {
   width: auto;
   height: auto;

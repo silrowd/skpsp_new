@@ -206,14 +206,14 @@ body {
 }
 /* ---------- Clients ---------- */
 .client {
-  border-color: rgba(255, 255, 255, .07);
+  border-color: rgba(0, 0, 0, .1);
   border-radius: 14px;
-  background: rgba(255, 255, 255, .03);
-  transition: transform .28s var(--ease), border-color .28s, background .28s, box-shadow .28s;
+  background: #fff;
+  transition: transform .28s var(--ease), border-color .28s, box-shadow .28s;
 }
 .client:hover {
   border-color: rgba(108, 178, 213, .55);
-  background: rgba(255, 255, 255, .06);
+  background: #fff;
   transform: translateY(-4px);
   box-shadow: 0 16px 34px rgba(0, 0, 0, .4);
 }
