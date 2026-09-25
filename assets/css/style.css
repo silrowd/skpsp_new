@@ -869,6 +869,9 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   background: linear-gradient(120deg, #243b53 0%, #3f5c7a 60%, #a22036 150%);
   color: #fff;
   padding: clamp(36px, 5vw, 56px) 0;
+  min-height: clamp(150px, 22vh, 200px);
+  display: flex;
+  align-items: center;
 }
 .page-hero h1 { color: #fff; margin: 0 0 8px; white-space: nowrap; }
 .page-hero p { color: rgba(255,255,255,.85); margin: 0; max-width: 70ch; }
@@ -1203,6 +1206,8 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
   .page-hero {
     background: none;
     padding: 0 0 14px;
+    min-height: 0;
+    display: block;
     border-bottom: 2px solid #000;
   }
   .page-hero h1 { color: #000; white-space: normal; }
