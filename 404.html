@@ -1,24 +1,128 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — страница не найдена</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f141b;color:#eef3f7;font-family:Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.wrap{text-align:center;padding:40px}
-h1{font-size:120px;font-weight:700;color:#0a2e5c;background:linear-gradient(135deg,#0a2e5c,#1a6ba8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-p{color:#9aa4ae;font-size:18px;margin:12px 0 28px}
-a{display:inline-block;background:#1a6ba8;color:#fff;text-decoration:none;padding:14px 34px;border-radius:10px;font-size:16px;transition:background .2s}
-a:hover{background:#14527f}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — страница не найдена | СК ПСП</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20260925a" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260925d" />
+  <link rel="stylesheet" href="assets/css/home.css?v=20260925a" />
 </head>
 <body>
-<div class="wrap">
-<h1>404</h1>
-<p>Такой страницы нет.</p>
-<a href="/">На главную</a>
-</div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index" aria-label="СК ПСП — на главную">
+        <img class="brand__logo" src="img/logo.png" width="184" height="240" alt="СК ПСП" />
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Основное меню">
+        <a href="index">Главная</a>
+        <a href="news">Новости</a>
+        <a href="about">О компании</a>
+        <div class="nav-item">
+        <a href="services" class="has-sub" aria-haspopup="true">
+          Услуги
+          
+          </a>
+        <div class="nav-dropdown">
+            <a href="service-general-contracting">Генеральный подряд</a>
+            <a href="service-monolith">Монолитные конструкции</a>
+            <a href="service-erection">Монтаж конструкций</a>
+            <a href="service-reconstruction">Реконструкция</a>
+          </div>
+      </div>
+
+        <div class="nav-item">
+        <a href="objects" class="has-sub" aria-haspopup="true">
+          Объекты
+          
+          </a>
+        <div class="nav-dropdown">
+            <a href="business-centers">Бизнес-центры</a>
+            <a href="public-buildings">Общественные здания</a>
+            <a href="shopping-malls">Торговые комплексы</a>
+            <a href="residential">Жилые дома</a>
+            <a href="industrial">Промышленные</a>
+            <a href="reconstruction">Реконструкция</a>
+          </div>
+      </div>
+        <a href="clients">Клиенты</a>
+        <a href="vacancies">Вакансии</a>
+      </nav>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-404">
+      <div class="container">
+        <span class="eyebrow eyebrow--orange">Ошибка 404</span>
+        <h1>Страница не найдена</h1>
+        <p class="page-404__text">Возможно, ссылка устарела или в адресе опечатка. Проверьте URL или вернитесь на главную.</p>
+        <a class="btn" href="index">На главную</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="index">
+            <img class="brand__logo" src="img/logo_white.png" width="61" height="80" alt="СК ПСП" />
+          </a>
+          <p>Строительство и реконструкция объектов различного назначения. Генеральный подряд полного цикла.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Компания</h4>
+          <a href="about">О компании</a>
+          <a href="certificates">Сертификаты</a>
+          <a href="reviews">Отзывы</a>
+          <a href="contacts">Контакты</a>
+          <a href="vacancies">Вакансии</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Услуги</h4>
+          <a href="service-general-contracting">Генеральный подряд</a>
+          <a href="service-monolith">Монолитные конструкции</a>
+          <a href="service-erection">Монтаж конструкций</a>
+          <a href="service-reconstruction">Реконструкция</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Объекты</h4>
+          <a href="business-centers">Бизнес-центры</a>
+          <a href="public-buildings">Общественные здания</a>
+          <a href="shopping-malls">Торговые комплексы</a>
+          <a href="residential">Жилые дома</a>
+          <a href="industrial">Промышленные объекты</a>
+          <a href="reconstruction">Реконструкция</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <a href="tel:+78123886371">+7 (812) 388-63-71</a>
+          <a href="mailto:bik-m@mail.ru">bik-m@mail.ru</a>
+          <a href="contacts#map">г. Санкт-Петербург, ул. Цветочная, 18, лит. А</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> «СК ПСП» — строительная компания</span>
+        <a href="privacy">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js?v=20260925b"></script>
 </body>
 </html>

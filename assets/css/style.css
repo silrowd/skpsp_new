@@ -1610,6 +1610,25 @@ button.card__media:hover::after { background: rgba(15, 23, 42, .35); }
 @media (max-width: 860px) {
   .oscroll-arrow { width: 38px; height: 38px; font-size: 19px; }
 }
+/* ---------- Страница 404 ---------- */
+.page-404 {
+  min-height: calc(100vh - 88px);
+  min-height: calc(100dvh - 88px);
+  display: flex;
+  align-items: center;
+  padding: 64px 0;
+}
+.page-404 h1 {
+  font-family: "Unbounded", sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin: 0 0 16px;
+}
+.page-404__text {
+  max-width: 520px;
+  font-size: var(--fs-lg);
+  margin: 0 0 32px;
+}
 /* Сентинел для IntersectionObserver (тень шапки при скролле, main.js) */
 .scroll-sentinel {
   position: absolute;
